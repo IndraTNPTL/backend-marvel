@@ -9,12 +9,12 @@ app.use(express.json());
 app.use(cors());
 
 // //! ROUTES FILES
-// const comicsRoutes = require("./routes/comics");
-// const charactersRoutes = require("./routes/characters");
+const comicsRoutes = require("./routes/comics");
+const charactersRoutes = require("./routes/characters");
 
 // //! LINKING ROUTES
-// app.use(comicsRoutes);
-// app.use(charactersRoutes);
+app.use(comicsRoutes);
+app.use(charactersRoutes);
 
 app.get("/", async (req, res) => {
   const response = await axios.get(
