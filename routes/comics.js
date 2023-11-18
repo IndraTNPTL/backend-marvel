@@ -10,8 +10,19 @@ const axios = require("axios");
 // ? GET ALL COMICS
 router.get("/comics", async (req, res) => {
   try {
+    const { page, title } = req.query;
+
+    const limit = 100;
+
+    let pageToSend = 1;
+    if (page) {
+      pageToSend = page;
+    }
+
+    const skip = (pageToSend - 1) * limit;
+
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.MY_API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?title=${title}&skip=${skip}&limit=${limit}&apiKey=${process.env.MY_API_KEY}`
     );
     return res.json({ data: response.data });
   } catch (error) {
